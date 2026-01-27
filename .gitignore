@@ -1,0 +1,11 @@
+# Source folder configurations and intermediate files
+Source/MinchoCandyWars/.vs/
+Source/MinchoCandyWars/obj/
+Source/MinchoCandyWars/*.user
+Source/MinchoCandyWars/*.suo
+Source/MinchoCandyWars/*.tmp
+Source/MinchoCandyWars/*.log
+Source/MinchoCandyWars/*.pdb
+
+# VSCode
+.vscode/

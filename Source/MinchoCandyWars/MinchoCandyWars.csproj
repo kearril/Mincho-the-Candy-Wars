@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>14</LangVersion>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<OutputPath>D:\SteamLibrary\steamapps\common\RimWorld\Mods\Mincho,the Candy Wars\1.6\Assemblies</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" />
+	  <PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
+	</ItemGroup>
+
+</Project>
