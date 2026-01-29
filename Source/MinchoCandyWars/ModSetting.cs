@@ -25,10 +25,11 @@ namespace MinchoCandyWars
         public MinchoCandyWarsSetting setting;
         private Vector2 scrollPosition = Vector2.zero;
         private float rightViewHeight = 1000f;
-
+        public static MinchoCandyWarsMod Instance { get; private set; }
         public MinchoCandyWarsMod(ModContentPack content) : base(content)
         {
             setting = GetSettings<MinchoCandyWarsSetting>();
+            Instance = this;
         }
 
         public override string SettingsCategory()
