@@ -8,7 +8,7 @@ namespace MinchoCandyWars
 {
     public enum CandyType : byte
     {
-        //无糖
+
         None = 0,
 
         //千机糖

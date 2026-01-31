@@ -1,14 +1,10 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
-namespace MinchoCandyWars.MinchoCandyAbility
+namespace MinchoCandyWars.Ability
 {
-    public class MinchoCandyAbility : Ability
+    public class MinchoCandyAbility : RimWorld.Ability
     {
         private int requiredMinchoCoreGrade;
         private int requiredMinchoBodyGrade;

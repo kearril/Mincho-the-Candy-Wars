@@ -98,9 +98,10 @@ namespace MinchoCandyWars
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Widgets.DrawMenuSection(inRect);
+            Rect outerRect = inRect.ContractedBy(20f);
+            Widgets.DrawMenuSection(outerRect);
 
-            Rect innerRect = inRect.ContractedBy(10f);
+            Rect innerRect = outerRect.ContractedBy(10f);
 
             float leftWidth = innerRect.width * 0.25f;
             float gap = 10f;

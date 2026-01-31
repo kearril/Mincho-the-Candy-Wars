@@ -7,6 +7,7 @@ using Verse;
 
 namespace MinchoCandyWars
 {
+    //核心数据组件
     public class CompMinchoCore : ThingComp
     {
         public CompProperties_MinchoCore Props => (CompProperties_MinchoCore)this.props;
@@ -36,6 +37,7 @@ namespace MinchoCandyWars
                 if (minchoCoreGrade < 5)
                 {
                     minchoCoreGrade++;
+                    parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
                 }
             }
         }
@@ -49,6 +51,7 @@ namespace MinchoCandyWars
                 if (minchoBodyGrade < 5)
                 {
                     minchoBodyGrade++;
+                    parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
                 }
             }
         }
@@ -64,6 +67,7 @@ namespace MinchoCandyWars
             set
             {
                 currentCandyType = value;
+                parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
             }
         }
 
