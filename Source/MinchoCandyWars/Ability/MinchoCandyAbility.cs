@@ -1,40 +1,34 @@
-﻿using RimWorld;
+﻿using MinchoCandyWars.Interface;
+using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
 namespace MinchoCandyWars.Ability
 {
-    public class MinchoCandyAbility : RimWorld.Ability
+    public class MinchoCandyAbility : RimWorld.Ability, IInitalizable
     {
-        private int requiredMinchoCoreGrade;
-        private int requiredMinchoBodyGrade;
-        private CandyType candyType;
-        private List<HediffDef> requiredHediffDefs;
-        private CompMinchoCore compMinchoCore;
-        private bool isInitialized = false;
+        public MinchoAbilityDefModExtension minchoAbilityDef = null!;
+        private int requiredMinchoCoreGrade => minchoAbilityDef.requiredMinchoCoreGrade;
+        private int requiredMinchoBodyGrade => minchoAbilityDef.requiredMinchoBodyGrade;
+        private CandyType candyType => minchoAbilityDef.candyType;
+        private List<HediffDef> requiredHediffDefs => minchoAbilityDef.requiredHediffDefs;
+        private CompMinchoCore compMinchoCore = null!;
 
         //初始化数据
-        private void InitializeMinchoCandyAbility()
+        void IInitalizable.Initialize()
         {
-            var modExt = this.def.GetModExtension<MinchoAbilityDefModExtension>();
-            requiredMinchoCoreGrade = modExt.requiredMinchoCoreGrade;
-            requiredMinchoBodyGrade = modExt.requiredMinchoBodyGrade;
-            candyType = modExt.candyType;
-            requiredHediffDefs = modExt.requiredHediffDefs;
+            minchoAbilityDef = def.GetModExtension<MinchoAbilityDefModExtension>();
             compMinchoCore = pawn.GetComp<CompMinchoCore>();
-
-            isInitialized = true;
+            if (minchoAbilityDef == null || compMinchoCore == null)
+            {
+                Log.ErrorOnce($"MinchoCandyWars: Ability {def.defName} is missing required MinchoAbilityDefModExtension or CompMinchoCore on pawn {pawn.LabelCap}.", 112421);
+                pawn.abilities.RemoveAbility(this.def);
+            }
         }
-
 
         //检查是否显示Gizmo
         private bool ShouldShowGizmo()
         {
-            //初始化
-            if (!isInitialized)
-            {
-                InitializeMinchoCandyAbility();
-            }
             //检查核心等级和躯体等级
             if (compMinchoCore.MinchoCoreGrade < requiredMinchoCoreGrade || compMinchoCore.MinchoBodyGrade < requiredMinchoBodyGrade)
             {

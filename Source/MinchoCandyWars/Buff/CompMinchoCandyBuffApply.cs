@@ -1,5 +1,6 @@
 ﻿using MinchoCandyWars.Data;
 using RimWorld;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Verse;
 
@@ -7,13 +8,13 @@ namespace MinchoCandyWars.Buff
 {
     public class CompMinchoCandyBuffApply : ThingComp
     {
-        private CompMinchoCore cachedCoreComp;
+        private CompMinchoCore cachedCoreComp = null!;
         private List<MinchoCandyBuffEffect> cachedEffects = new List<MinchoCandyBuffEffect>();
         private bool effectsDirty = true;
-        private MinchoCandyBuffGrade cachedCoreGrade;
-        private MinchoCandyBuffGrade cachedBodyGrade;
+        private MinchoCandyBuffGrade? cachedCoreGrade;
+        private MinchoCandyBuffGrade? cachedBodyGrade;
 
-        public Pawn pawn => this.parent as Pawn;
+        public Pawn pawn => (Pawn)parent;
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
@@ -34,7 +35,7 @@ namespace MinchoCandyWars.Buff
         }
 
         //获取当前的BuffDef
-        private MinchoCandyBuffDef GetCurrentBuffDef()
+        private MinchoCandyBuffDef? GetCurrentBuffDef()
         {
             // 未选择糖饰时不产生任何 Buff
             if (cachedCoreComp.CurrentCandyType == CandyType.None)
@@ -52,10 +53,10 @@ namespace MinchoCandyWars.Buff
         }
 
         //查找满足条件的最高等级
-        private MinchoCandyBuffGrade FindMaxGrade(List<MinchoCandyBuffGrade> grades, int currentGrade)
+        private MinchoCandyBuffGrade? FindMaxGrade(List<MinchoCandyBuffGrade> grades, int currentGrade)
         {
             // 从所有等级里选出 requiredGrade 不超过当前等级的最大项
-            MinchoCandyBuffGrade maxGrade = null;
+            MinchoCandyBuffGrade? maxGrade = null;
             int maxGradeLevel = 0;
 
             foreach (var grade in grades)
@@ -173,7 +174,7 @@ namespace MinchoCandyWars.Buff
             }
         }
 
-        private static bool HasStatEffect(MinchoCandyBuffGrade grade, StatDef stat)
+        private static bool HasStatEffect([NotNullWhen(true)] MinchoCandyBuffGrade? grade, StatDef stat)
         {
             // 用于判断该等级是否对指定 stat 有影响
             if (grade == null || grade.effects == null)

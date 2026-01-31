@@ -11,7 +11,7 @@ namespace MinchoCandyWars
     public class CompMinchoCore : ThingComp
     {
         public CompProperties_MinchoCore Props => (CompProperties_MinchoCore)this.props;
-        public Pawn pawn => this.parent as Pawn;
+        public Pawn pawn => (Pawn)this.parent;
 
         private int minchoCoreGrade = 0;
 

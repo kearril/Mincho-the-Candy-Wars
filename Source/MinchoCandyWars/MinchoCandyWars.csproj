@@ -4,10 +4,10 @@
 		<TargetFramework>net472</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<LangVersion>14</LangVersion>
+		<LangVersion>Latest</LangVersion>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-		<OutputPath>D:\SteamLibrary\steamapps\common\RimWorld\Mods\Mincho,the Candy Wars\1.6\Assemblies</OutputPath>
+		<OutputPath>..\..\1.6\Assemblies</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
