@@ -11,6 +11,8 @@ namespace MinchoCandyWars.Ability
 
         public int requiredMinchoBodyGrade = 0;
 
+        public float requiredMinchoCandyValue = 0f;
+
         public List<HediffDef> requiredHediffDefs = new List<HediffDef>();
 
     }

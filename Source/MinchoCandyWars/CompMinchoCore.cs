@@ -19,6 +19,8 @@ namespace MinchoCandyWars
 
         private CandyType currentCandyType = CandyType.None;
 
+        private float minchoCandyValue = 0;
+
         //数据存档
         public override void PostExposeData()
         {
@@ -26,6 +28,7 @@ namespace MinchoCandyWars
             Scribe_Values.Look(ref minchoCoreGrade, "minchoCoreGrade", 0);
             Scribe_Values.Look(ref minchoBodyGrade, "minchoBodyGrade", 0);
             Scribe_Values.Look(ref currentCandyType, "currentCandyType", CandyType.None);
+            Scribe_Values.Look(ref minchoCandyValue, "minchoCandyValue", 0);
         }
 
         //核心等级
@@ -34,11 +37,9 @@ namespace MinchoCandyWars
             get => minchoCoreGrade;
             set
             {
-                if (minchoCoreGrade < 5)
-                {
-                    minchoCoreGrade++;
-                    parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
-                }
+                minchoCoreGrade = Math.Clamp(value, 0, 5);
+                parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
+
             }
         }
 
@@ -48,11 +49,9 @@ namespace MinchoCandyWars
             get => minchoBodyGrade;
             set
             {
-                if (minchoBodyGrade < 5)
-                {
-                    minchoBodyGrade++;
-                    parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
-                }
+                minchoBodyGrade = Math.Clamp(value, 0, 5);
+                parent.BroadcastCompSignal(CompSignals.MinchoCoreDataChange);
+
             }
         }
 
@@ -71,7 +70,46 @@ namespace MinchoCandyWars
             }
         }
 
+        //糖果值
+        public float MinchoCandyValue
+        {
+            get => minchoCandyValue;
+            set
+            {
+                minchoCandyValue = Math.Clamp(value, 0f, CurrentMaxCandyValue);
+            }
+        }
 
+        //当前糖果值上限
+        public float CurrentMaxCandyValue => MinchoTotalGrade * 50f;
+
+        //获取温度增益系数
+        public float GetTempGainFactor()
+        {
+            if (!pawn.Spawned) return 1f;
+            float t = pawn.AmbientTemperature;
+            if (t < -50f) return 3f;
+            if (t < -30f) return 2f;
+            if (t < -15f) return 1.5f;
+            if (t < 0f) return 1.2f;
+            return 1f;
+        }
+
+        public override void CompTick()
+        {
+            base.CompTick();
+
+            //每10tick回复糖果值，总数值为每天回复当前糖果值上限的50%
+            if (pawn.IsHashIntervalTick(10))
+            {
+                if (MinchoCandyValue < CurrentMaxCandyValue)
+                {
+                    float recoveryAmount = CurrentMaxCandyValue / 12000f;
+                    recoveryAmount *= GetTempGainFactor();
+                    MinchoCandyValue += recoveryAmount;
+                }
+            }
+        }
     }
 
     public class CompProperties_MinchoCore : CompProperties

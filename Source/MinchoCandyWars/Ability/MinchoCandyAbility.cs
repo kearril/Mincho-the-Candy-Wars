@@ -1,6 +1,7 @@
 ﻿using MinchoCandyWars.Interface;
 using RimWorld;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Verse;
 
 namespace MinchoCandyWars.Ability
@@ -11,6 +12,7 @@ namespace MinchoCandyWars.Ability
         private int requiredMinchoCoreGrade => minchoAbilityDef.requiredMinchoCoreGrade;
         private int requiredMinchoBodyGrade => minchoAbilityDef.requiredMinchoBodyGrade;
         private CandyType candyType => minchoAbilityDef.candyType;
+        private float requiredMinchoCandyValue => minchoAbilityDef.requiredMinchoCandyValue;
         private List<HediffDef> requiredHediffDefs => minchoAbilityDef.requiredHediffDefs;
         private CompMinchoCore compMinchoCore = null!;
 
@@ -24,6 +26,17 @@ namespace MinchoCandyWars.Ability
                 Log.ErrorOnce($"MinchoCandyWars: Ability {def.defName} is missing required MinchoAbilityDefModExtension or CompMinchoCore on pawn {pawn.LabelCap}.", 112421);
                 pawn.abilities.RemoveAbility(this.def);
             }
+        }
+
+        //检查Gizmo是否禁用，如果糖果值不够则禁用
+        public override bool GizmoDisabled(out string reason)
+        {
+            if (compMinchoCore.MinchoCandyValue < requiredMinchoCandyValue)
+            {
+                reason = "MinchoCandyWars.Ability.MinchoCandyValueDontEnough".Translate(requiredMinchoCandyValue);
+                return true;
+            }
+            return base.GizmoDisabled(out reason);
         }
 
         //检查是否显示Gizmo
@@ -56,40 +69,69 @@ namespace MinchoCandyWars.Ability
         //控制Gizmo显示
         public override IEnumerable<Command> GetGizmos()
         {
-            if (SettingUtility.IsDebugMode())
+            if (!ShouldShowGizmo())
             {
-                foreach (var gizmo in base.GetGizmos())
-                {
-                    yield return gizmo;
-                }
                 yield break;
             }
-            if (ShouldShowGizmo())
+
+            if (gizmo == null)
             {
-                foreach (var gizmo in base.GetGizmos())
+                gizmo = new Command_MinchoAbility(this, pawn);
+                gizmo.Order = def.uiOrder;
+            }
+
+            if (!pawn.Drafted || def.showWhenDrafted)
+            {
+                yield return gizmo;
+            }
+
+            if (SettingUtility.IsDebugMode() && OnCooldown && CanCooldown)
+            {
+                yield return new Command_Action
                 {
-                    yield return gizmo;
-                }
+                    defaultLabel = "DEV: Reset cooldown",
+                    action = delegate
+                    {
+                        ResetCooldown();//重置冷却
+                        RemainingCharges = maxCharges;//重置次数
+                    }
+                };
             }
         }
 
-        //控制Gizmo显示
+        //控制额外Gizmo显示
         public override IEnumerable<Gizmo> GetGizmosExtra()
         {
-            if (SettingUtility.IsDebugMode())
+            if (!ShouldShowGizmo())
             {
-                foreach (var gizmo in base.GetGizmosExtra())
-                {
-                    yield return gizmo;
-                }
                 yield break;
             }
-            if (ShouldShowGizmo())
+            foreach (var gizmo in base.GetGizmosExtra())
             {
-                foreach (var gizmo in base.GetGizmosExtra())
-                {
-                    yield return gizmo;
-                }
+                yield return gizmo;
+            }
+        }
+
+        //消耗对应的糖果值
+        protected override void PreActivate(LocalTargetInfo? target)
+        {
+            base.PreActivate(target);
+            compMinchoCore.MinchoCandyValue -= requiredMinchoCandyValue;
+        }
+
+        public string MinchoCandyValueConsumeText()
+        {
+            return "MinchoCandyWars.Ability.CandyValueConsume".Translate(requiredMinchoCandyValue);
+        }
+
+        //在Tooltip中显示消耗的糖果值
+        public override string Tooltip
+        {
+            get
+            {
+                string text = base.Tooltip;
+                text = text + "\n\n" + "MinchoCandyWars.Ability.CandyValueConsume".Translate(requiredMinchoCandyValue);
+                return text;
             }
         }
     }
