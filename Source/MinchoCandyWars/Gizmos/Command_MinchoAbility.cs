@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using MinchoCandyWars.Ability;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace MinchoCandyWars.Ability
+namespace MinchoCandyWars.Gizmos
 {
     public class Command_MinchoAbility : Command_Ability
     {
