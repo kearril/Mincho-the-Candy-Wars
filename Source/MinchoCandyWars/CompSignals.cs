@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace MinchoCandyWars
 {
 
-    //×é¼şĞÅºÅ
+    //Compä¿¡å·çº¿
     public static class CompSignals
     {
-        //ºËĞÄÊı¾İ±ä¸ü
+        //æ•°æ®å˜æ›´
         public const string MinchoCoreDataChange = "MinchoCoreDataChange";
     }
 }

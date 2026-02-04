@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
+﻿using Verse;
 
 namespace MinchoCandyWars
 {
@@ -108,6 +103,92 @@ namespace MinchoCandyWars
                     recoveryAmount *= GetTempGainFactor();
                     MinchoCandyValue += recoveryAmount;
                 }
+            }
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            yield return new Gizmos.MinchoCandyGizmo(pawn, this);
+
+            if (SettingUtility.IsDebugMode())
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:切换糖饰",
+                    action = delegate
+                    {
+                        List<FloatMenuOption> options = new List<FloatMenuOption>();
+
+                        foreach (CandyType candyType in Enum.GetValues(typeof(CandyType)))
+                        {
+                            CandyType localCandyType = candyType;
+                            string label = candyType.ToString();
+                            if (candyType == CurrentCandyType)
+                            {
+                                label += "(当前)";
+                            }
+                            FloatMenuOption option = new FloatMenuOption(
+                                label,
+                                delegate
+                                {
+                                    CurrentCandyType = localCandyType;
+                                }
+                            );
+                            if (candyType == CurrentCandyType)
+                            {
+                                option.Disabled = true;
+                            }
+                            options.Add(option);
+                        }
+
+                        Find.WindowStack.Add(new FloatMenu(options));
+                    }
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:核心等级+1",
+                    action = delegate
+                    {
+                        MinchoCoreGrade += 1;
+                    }
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:躯体等级+1",
+                    action = delegate
+                    {
+                        MinchoBodyGrade += 1;
+                    }
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:增加100糖果值",
+                    action = delegate
+                    {
+                        MinchoCandyValue += 100f;
+                    }
+                };
+
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:全满",
+                    action = delegate
+                    {
+                        MinchoCoreGrade = 5;
+                        MinchoBodyGrade = 5;
+                        MinchoCandyValue = CurrentMaxCandyValue;
+                    }
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "Dev:清空",
+                    action = delegate
+                    {
+                        MinchoCoreGrade = 0;
+                        MinchoBodyGrade = 0;
+                        MinchoCandyValue = 0f;
+                    }
+                };
             }
         }
     }

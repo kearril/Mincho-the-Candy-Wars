@@ -37,6 +37,10 @@ namespace MinchoCandyWars.Buff
         //获取当前的BuffDef
         private MinchoCandyBuffDef? GetCurrentBuffDef()
         {
+            if (cachedCoreComp == null)
+            {
+                return null;
+            }
             // 未选择糖饰时不产生任何 Buff
             if (cachedCoreComp.CurrentCandyType == CandyType.None)
             {
@@ -75,6 +79,11 @@ namespace MinchoCandyWars.Buff
         //收集并返回当前适用的所有Buff效果
         private List<MinchoCandyBuffEffect> GetApplicableEffects()
         {
+            if (cachedCoreComp == null)
+            {
+                cachedEffects.Clear();
+                return cachedEffects;
+            }
             // 核心数据未变化时直接复用缓存
             if (!effectsDirty)
             {

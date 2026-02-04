@@ -9,3 +9,6 @@ Source/MinchoCandyWars/*.pdb
 
 # VSCode
 .vscode/
+
+# rider
+.idea/
