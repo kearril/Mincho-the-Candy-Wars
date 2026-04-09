@@ -15,7 +15,7 @@ namespace MinchoCandyWars.Patch.Ability
         //插入初始化接口调用
         [HarmonyPostfix]
         [HarmonyPatch(nameof(RimWorld.Ability.Initialize))]
-        public static void Postfix_Initialize(RimWorld.Ability __instance, ref bool __result)
+        public static void Postfix_Initialize(RimWorld.Ability __instance)
         {
             if (__instance is IInitalizable initalizable)
             {

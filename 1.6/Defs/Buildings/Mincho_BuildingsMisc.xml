@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="TableGatherSpotBase">
+		<defName>MCW_MinchoTable2x2c</defName>
+		<label>mincho table (2x2)</label>
+		<description>A sturdy 2x2 table styled for Mincho settlements.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Table2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>1</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<size>(2,2)</size>
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<!-- TODO: set custom table texture
+		<graphicData>
+			<texPath>Things/Building/Furniture/Table/TODO_MCW_MinchoTable2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		-->
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>MCW_MinchoStool</defName>
+		<label>mincho stool</label>
+		<description>A compact stool styled for Mincho settlements.</description>
+		<replaceTags>
+			<li>Chair</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Furniture/MCW_MinchoStool</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<damageData>
+				<rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+				<rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+				<rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+				<rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<shadowData>
+				<volume>(0.18, 0.23, 0.18)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>450</WorkToBuild>
+			<Mass>3</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>0</Beauty>
+			<Comfort>0.5</Comfort>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc6</designationHotKey>
+		<uiOrder>2400</uiOrder>
+		<fillPercent>0.2</fillPercent>
+		<building>
+			<isSittable>true</isSittable>
+			<paintable>true</paintable>
+		</building>
+		<uiIconOffset>(0, -0.05)</uiIconOffset>
+		<comps>
+			<li Class="CompProperties_Styleable"></li>
+		</comps>
+		<!-- TODO: set custom stool texture
+		<graphicData>
+			<texPath>Things/Building/Furniture/Chair/TODO_MCW_MinchoStool</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		-->
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>MCW_MinchoCouch</defName>
+		<label>mincho couch</label>
+		<description>A comfortable seat styled for Mincho settlements.</description>
+		<replaceTags>
+			<li>Chair</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Furniture/MCW_MinchoCouch</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<shadowData>
+				<volume>(0.3, 0.33, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconScale>0.9</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>160</MaxHitPoints>
+			<WorkToBuild>20000</WorkToBuild>
+			<Mass>70</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>8</Beauty>
+			<Comfort>0.85</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<costStuffCount>200</costStuffCount>
+		<pathCost>30</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<size>(2,1)</size>
+		<designationHotKey>Misc8</designationHotKey>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<uiOrder>2430</uiOrder>
+		<building>
+			<isSittable>true</isSittable>
+			<multiSittable>true</multiSittable>
+			<destroySound>BuildingDestroyed_Soft_Small</destroySound>
+		</building>
+		<!-- TODO: set custom couch texture
+		<graphicData>
+			<texPath>Things/Building/Furniture/Chair/TODO_MCW_MinchoCouch</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		-->
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>MCW_MinchoFence</defName>
+		<label>mincho fence</label>
+		<description>A boundary fence styled for Mincho settlements.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<replaceTags>
+			<li>Wall</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Linked/Fence</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>Asymmetric</linkType>
+			<linkFlags>
+				<li>Fences</li>
+			</linkFlags>
+			<asymmetricLink>
+				<linkFlags>
+					<li>Wall</li>
+					<li>Rock</li>
+				</linkFlags>
+				<linkToDoors>true</linkToDoors>
+				<drawDoorBorderEast>
+					<color>(0,0,0)</color>
+					<size>(0.04, 0.77)</size>
+					<offset>(0.5, 0, -0.08)</offset>
+				</drawDoorBorderEast>
+				<drawDoorBorderWest>
+					<color>(0,0,0)</color>
+					<size>(0.04, 0.77)</size>
+					<offset>(-0.5, 0, -0.08)</offset>
+				</drawDoorBorderWest>
+			</asymmetricLink>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+				<offset>(0,0,-0.23)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.35,0.1,0.3,0.7)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/Fence_MenuIcon</uiIconPath>
+		<uiIconPathsStuff>
+			<li>
+				<appearance>Metal</appearance>
+				<iconPath>Things/Building/Linked/FenceMetal_MenuIcon</iconPath>
+			</li>
+		</uiIconPathsStuff>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<WorkToBuild>70</WorkToBuild>
+			<Flammability>1</Flammability>
+		</statBases>
+		<costStuffCount>1</costStuffCount>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>80</pathCost>
+		<blockWind>false</blockWind>
+		<fillPercent>0.25</fillPercent>
+		<drawStyleCategory>Defenses</drawStyleCategory>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>Structure</designationCategory>
+		<uiOrder>2020</uiOrder>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<building>
+			<isInert>true</isInert>
+			<isFence>true</isFence>
+			<isPlaceOverableWall>true</isPlaceOverableWall>
+			<ai_chillDestination>false</ai_chillDestination>
+			<ai_neverTrashThis>true</ai_neverTrashThis>
+			<relatedBuildCommands>
+				<li>PenMarker</li>
+				<li>FenceGate</li>
+			</relatedBuildCommands>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/Fence_Blueprint</texPath>
+				<graphicClass>Graphic_Appearances</graphicClass>
+			</blueprintGraphicData>
+			<paintable>true</paintable>
+		</building>
+		<!-- TODO: set custom fence texture
+		<graphicData>
+			<texPath>Things/Building/Security/Fence/TODO_MCW_MinchoFence</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<shaderType>Cutout</shaderType>
+		</graphicData>
+		-->
+	</ThingDef>
+
+	<TerrainDef ParentName="FloorBase">
+		<defName>MCW_MinchoFloorA</defName>
+		<label>mincho floor A</label>
+		<description>A durable floor pattern for Mincho settlements.</description>
+		<renderPrecedence>230</renderPrecedence>
+		<texturePath>Terrain/Surfaces/PavedTile</texturePath>
+		<color>(140,140,140)</color>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>300</WorkToBuild>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<costList>
+			<Steel>2</Steel>
+		</costList>
+		<designationHotKey>Misc8</designationHotKey>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<uiOrder>2030</uiOrder>
+		<!-- TODO: set custom floor texture
+		<texturePath>Terrain/Surfaces/TODO_MCW_MinchoFloorA</texturePath>
+		-->
+	</TerrainDef>
+
+	<TerrainDef ParentName="FloorBase">
+		<defName>MCW_MinchoFloorB</defName>
+		<label>mincho floor B</label>
+		<description>A durable floor pattern for Mincho settlements.</description>
+		<renderPrecedence>230</renderPrecedence>
+		<texturePath>Terrain/Surfaces/PavedTile</texturePath>
+		<color>(140,140,140)</color>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>300</WorkToBuild>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<costList>
+			<Steel>2</Steel>
+		</costList>
+		<designationHotKey>Misc8</designationHotKey>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<uiOrder>2030</uiOrder>
+		<!-- TODO: set custom floor texture
+		<texturePath>Terrain/Surfaces/TODO_MCW_MinchoFloorB</texturePath>
+		-->
+	</TerrainDef>
+
+	<TerrainDef ParentName="FloorBase">
+		<defName>MCW_MinchoFloorC</defName>
+		<label>mincho floor C</label>
+		<description>A durable floor pattern for Mincho settlements.</description>
+		<renderPrecedence>230</renderPrecedence>
+		<texturePath>Terrain/Surfaces/PavedTile</texturePath>
+		<color>(140,140,140)</color>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>300</WorkToBuild>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<costList>
+			<Steel>2</Steel>
+		</costList>
+		<designationHotKey>Misc8</designationHotKey>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<uiOrder>2030</uiOrder>
+		<!-- TODO: set custom floor texture
+		<texturePath>Terrain/Surfaces/TODO_MCW_MinchoFloorC</texturePath>
+		-->
+	</TerrainDef>
+
+</Defs>
